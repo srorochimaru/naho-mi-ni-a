@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Naho 💛</title>
+    <style>
+        :root {
+            --bg-color: #0e0e11;
+            --card-bg: rgba(28, 28, 33, 0.85);
+            --text-color: #e4e4e7;
+            --accent-yellow: #facc15;
+            --accent-glow: rgba(250, 204, 21, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at 50% 0%, #1f1c14 0%, #0e0e11 70%);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Contenedor de partículas en el fondo */
+        #particles-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            bottom: -10px;
+            background-color: var(--accent-yellow);
+            border-radius: 50%;
+            opacity: 0;
+            box-shadow: 0 0 8px var(--accent-yellow);
+            animation: floatUp linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(0.8);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.6;
+            }
+            80% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-105vh) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            animation: fadeIn 1.2s ease-in-out;
+            position: relative;
+            z-index: 1;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: var(--accent-yellow);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: #a1a1aa;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Títulos de Secciones */
+        .section-title {
+            color: var(--accent-yellow);
+            font-size: 1.5rem;
+            margin: 2.5rem 0 1.2rem 0;
+            text-align: left;
+            border-left: 4px solid var(--accent-yellow);
+            padding-left: 10px;
+        }
+
+        /* Galería y Tarjetas */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            position: relative;
+            background-color: var(--card-bg);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: slideUp 0.8s ease backwards;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px var(--accent-glow);
+        }
+
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 2px solid var(--accent-yellow);
+        }
+
+        .card-content {
+            padding: 1.2rem;
+            text-align: left;
+            padding-bottom: 2rem;
+        }
+
+        .card-content h3 {
+            font-size: 1.1rem;
+            color: var(--accent-yellow);
+            margin-bottom: 0.4rem;
+        }
+
+        .card-content p {
+            font-size: 0.95rem;
+            color: #d4d4d8;
+            line-height: 1.4;
+        }
+
+        /* Bloques de Mensaje General */
+        .content-box {
+            position: relative;
+            background-color: var(--card-bg);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            padding-bottom: 2.5rem;
+            border-radius: 16px;
+            border-left: 4px solid var(--accent-yellow);
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            text-align: left;
+        }
+
+        .content-box h2 {
+            color: var(--accent-yellow);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .content-box p {
+            line-height: 1.6;
+            color: #d4d4d8;
+            margin-bottom: 0.8rem;
+        }
+
+        /* Mini flor decorativa en esquina inferior derecha */
+        .card-flower {
+            position: absolute;
+            bottom: 12px;
+            right: 15px;
+            width: 22px;
+            height: 22px;
+            animation: floatFlower 3s ease-in-out infinite alternate;
+            pointer-events: none;
+            opacity: 0.85;
+        }
+
+        .mini-petal {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-yellow);
+            border-radius: 50%;
+            top: 7px;
+            left: 7px;
+        }
+
+        .mini-petal:nth-child(1) { transform: translate(0, -7px); }
+        .mini-petal:nth-child(2) { transform: translate(7px, 0); }
+        .mini-petal:nth-child(3) { transform: translate(0, 7px); }
+        .mini-petal:nth-child(4) { transform: translate(-7px, 0); }
+
+        .mini-center {
+            position: absolute;
+            width: 7px;
+            height: 7px;
+            background-color: #b45309;
+            border-radius: 50%;
+            top: 7.5px;
+            left: 7.5px;
+            z-index: 2;
+        }
+
+        /* Sección de Música y Video */
+        .music-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .music-wrapper {
+            position: relative;
+            background-color: var(--card-bg);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(250, 204, 21, 0.25);
+            border-radius: 14px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .music-wrapper:hover {
+            border-color: var(--accent-yellow);
+            box-shadow: 0 4px 15px rgba(250, 204, 21, 0.15);
+        }
+
+        .music-header {
+            padding: 1.1rem 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .music-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-align: left;
+        }
+
+        .music-icon {
+            font-size: 1.8rem;
+            color: var(--accent-yellow);
+        }
+
+        .music-info h4 {
+            font-size: 1.05rem;
+            color: var(--text-color);
+            margin-bottom: 0.2rem;
+        }
+
+        .music-info p {
+            font-size: 0.85rem;
+            color: #a1a1aa;
+            margin: 0;
+        }
+
+        /* Botón Sorpresa / Ataque Amoroso */
+        .interactive-surprise {
+            background: linear-gradient(135deg, #1c1c21 0%, #27272a 100%);
+            border: 2px dashed var(--accent-yellow);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .surprise-btn {
+            background-color: var(--accent-yellow);
+            color: #0e0e11;
+            font-weight: bold;
+            font-size: 1rem;
+            padding: 0.8rem 1.8rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 0 15px var(--accent-glow);
+            margin-top: 1rem;
+        }
+
+        .surprise-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px var(--accent-yellow);
+        }
+
+        #hidden-truth {
+            display: none;
+            margin-top: 1.5rem;
+            text-align: left;
+            background: rgba(14, 14, 17, 0.95);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent-yellow);
+            animation: fadeIn 0.8s ease;
+        }
+
+        #hidden-truth p {
+            color: #d4d4d8;
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+        }
+
+        /* Jardín de Flores Amarillas (Abajo) - Clicables */
+        .flowers-garden {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+            padding-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .flower {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: sway 3s ease-in-out infinite alternate;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .flower:hover {
+            transform: scale(1.15) rotate(0deg);
+        }
+
+        .flower:nth-child(even) {
+            animation-duration: 3.5s;
+            animation-direction: alternate-reverse;
+        }
+
+        .flower-head {
+            position: relative;
+            width: 35px;
+            height: 35px;
+        }
+
+        .petal {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background-color: var(--accent-yellow);
+            border-radius: 50%;
+            top: 10px;
+            left: 10px;
+            box-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        .petal:nth-child(1) { transform: translate(0, -12px); }
+        .petal:nth-child(2) { transform: translate(12px, 0); }
+        .petal:nth-child(3) { transform: translate(0, 12px); }
+        .petal:nth-child(4) { transform: translate(-12px, 0); }
+        .petal:nth-child(5) { transform: translate(8px, -8px); }
+        .petal:nth-child(6) { transform: translate(-8px, -8px); }
+        .petal:nth-child(7) { transform: translate(8px, 8px); }
+        .petal:nth-child(8) { transform: translate(-8px, 8px); }
+
+        .flower-center {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background-color: #b45309;
+            border-radius: 50%;
+            top: 10.5px;
+            left: 10.5px;
+            z-index: 2;
+        }
+
+        .flower-stem {
+            width: 3px;
+            height: 60px;
+            background-color: #16a34a;
+            border-radius: 2px;
+        }
+
+        /* Estilo para los textos flotantes aleatorios al tocar las flores */
+        .floating-popup {
+            position: fixed;
+            z-index: 9999;
+            font-weight: bold;
+            font-size: 1.15rem;
+            color: #facc15;
+            background: rgba(14, 14, 17, 0.85);
+            padding: 8px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(250, 204, 21, 0.4);
+            box-shadow: 0 4px 15px rgba(250, 204, 21, 0.3);
+            pointer-events: none;
+            animation: floatRandomPopup 3s forwards ease-out;
+            white-space: nowrap;
+        }
+
+        @keyframes floatRandomPopup {
+            0% {
+                opacity: 0;
+                transform: translateY(0px) scale(0.6);
+            }
+            20% {
+                opacity: 1;
+                transform: translateY(-20px) scale(1.05);
+            }
+            80% {
+                opacity: 1;
+                transform: translateY(-70px) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-110px) scale(0.9);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes sway {
+            from { transform: rotate(-5deg); }
+            to { transform: rotate(5deg); }
+        }
+
+        @keyframes floatFlower {
+            from { transform: translateY(0) rotate(0deg); }
+            to { transform: translateY(-4px) rotate(8deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="particles-bg"></div>
+
+    <div class="container">
+        <header>
+            <h1>Para Naho 💛</h1>
+            <p>Un detallito que armé pensando en ti, bichito.</p>
+        </header>
+
+        <!-- Galería de Fotos -->
+        <h2 class="section-title">Nuestros Recuerdos</h2>
+        <div class="cards-grid">
+            
+            <!-- Tarjeta 1 -->
+            <div class="card" style="animation-delay: 0.2s;">
+                <img src="https://lh3.googleusercontent.com/d/1FWXZst0uF5EJRGDe3PFQ3k6xMVOUX4CT" alt="Momento juntos">
+                <div class="card-content">
+                    <h3>De cacería / Juntos</h3>
+                    <p>cada momento a tu lado me vuelve feliz, la verdad me encanta pasar tiempo contigo.</p>
+                </div>
+                <div class="card-flower">
+                    <div class="mini-petal"></div><div class="mini-petal"></div><div class="mini-petal"></div><div class="mini-petal"></div>
+                    <div class="mini-center"></div>
+                </div>
+            </div>
+
+            <!-- Tarjeta 2 -->
+            <div class="card" style="animation-delay: 0.4s;">
+                <img src="https://lh3.googleusercontent.com/d/1m8M29w5x-7uEpjdu5mVjzVx7dgrEK32w" alt="Recuerdo bonito">
+                <div class="card-content">
+                    <h3>Tu risa y tus cosas</h3>
+                    <p>Aunque a veces ande en mis cosas o medio serio, verte sonreír me vuelve loco por completo.</p>
+                </div>
+                <div class="card-flower">
+                    <div class="mini-petal"></div><div class="mini-petal"></div><div class="mini-petal"></div><div class="mini-petal"></div>
+                    <div class="mini-center"></div>
+                </div>
+            </div>
+
+            <!-- Tarjeta 3 -->
+            <div class="card" style="animation-delay: 0.6s;">
+                <img src="https://lh3.googleusercontent.com/d/1SVL-tO0uLP-tCgNFSIGQV222zJRb7AZE" alt="Juntos">
+                <div class="card-content">
+                    <h3>Lo que vales</h3>
+                    <p>Para mi vales mucho, y quiero estar para ti en las buenas y en las malas.</p>
+                </div>
+                <div class="card-flower">
+                    <div class="mini-petal"></div><div class="mini-petal"></div><div class="mini-petal"></div><div class="mini-petal"></div>
+                    <div class="mini-center"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Mensaje / Poema -->
+        <div class="content-box">
+            <h2>Hablando claro y sin rodeos...</h2>
+            <p>Mira, sé que a veces me cuesta expresarme o que puedo parecer medio terco, pero lo que siento por ti es bien real. Hice este espacio porque me importás un montón, y aunque las cosas a veces se pongan intensas, lo que quiero es construir algo sólido y sincero, te quiero mi niña bella.</p>
+            <div class="card-flower">
+                <div class="mini-petal"></div><div class="mini-petal"></div><div class="mini-petal"></div><div class="mini-petal"></div>
+                <div class="mini-center"></div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN: Nuestra Música y Canciones -->
+        <h2 class="section-title">Nuestra Música 🎵</h2>
+        <div class="music-grid">
+            
+            <!-- Video de Google Drive -->
+            <div class="music-wrapper">
+                <div class="music-header" onclick="window.open('https://drive.google.com/file/d/1S_UUvyTNO6sDu0eb49yp6jAsoqtEij_Y/view?usp=sharing', '_blank')">
+                    <div class="music-left">
+                        <div class="music-icon">🎧</div>
+                        <div class="music-info">
+                            <h4>Video Especial para Naho</h4>
+                            <p>Dale clic para ver el video completo 💛</p>
+                        </div>
+                    </div>
+                    <span style="color: var(--accent-yellow); font-size: 0.9rem; font-weight: bold;">▶ Reproducir</span>
+                </div>
+                <div class="card-flower">
+                    <div class="mini-petal"></div><div class="mini-petal"></div><div class="mini-petal"></div><div class="mini-petal"></div>
+                    <div class="mini-center"></div>
+                </div>
+            </div>
+
+            <!-- Canción Secret - OneRepublic -->
+            <div class="music-wrapper">
+                <div class="music-header" onclick="window.open('https://youtu.be/DkBJZaYjpEs', '_blank')">
+                    <div class="music-left">
+                        <div class="music-icon">✨</div>
+                        <div class="music-info">
+                            <h4>Bailamos????</h4>
+                            <p>pongamonos los audifonos antes va?? 💫</p>
+                        </div>
+                    </div>
+                    <span style="color: var(--accent-yellow); font-size: 0.9rem; font-weight: bold;">▶ Escuchar</span>
+                </div>
+                <div class="card-flower">
+                    <div class="mini-petal"></div><div class="mini-petal"></div><div class="mini-petal"></div><div class="mini-petal"></div>
+                    <div class="mini-center"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- SECCIÓN: Espacio Personal -->
+        <div class="content-box">
+            <h2>Lo que pienso de ti... ✨</h2>
+            <p>Esque deverdad, me la paso bien muy bien contigo. Me encanta escucharte hablar, reírme de tus ocurrencias y saber que, a pesar de cualquier tropiezo o estrés diario, sos de las personas que más suman en mis días. Estoy aquí para aprender, para poner de mi parte y para ser ese lugar seguro donde podás ser tú al 100%.</p>
+            <div class="card-flower">
+                <div class="mini-petal"></div><div class="mini-petal"></div><div class="mini-petal"></div><div class="mini-petal"></div>
+                <div class="mini-center"></div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN: Risas y Complicidad -->
+        <div class="content-box">
+            <h2>Entre bromas y confianza 😄</h2>
+            <p>Fuera de bromas, sos mi persona favorita para pasar el rato, contarnos cosas y olvidarnos del mundo un ratito. Me gusta lo que estamos formando, no te arrepentiras.</p>
+            <div class="card-flower">
+                <div class="mini-petal"></div><div class="mini-petal"></div><div class="mini-petal"></div><div class="mini-petal"></div>
+                <div class="mini-center"></div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN: Expectativas a Futuro -->
+        <div class="content-box">
+            <h2>Lo que se viene 🚀</h2>
+            <p>Yo me imagino a futuro dándole con todo a nuestras metas, logrando cada uno en lo suyo, pero apoyándonos y armando más planes bonitos. Vamos paso a paso, pero con la mira bien puesta en construir algo duradero.</p>
+            <div class="card-flower">
+                <div class="mini-petal"></div><div class="mini-petal"></div><div class="mini-petal"></div><div class="mini-petal"></div>
+                <div class="mini-center"></div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN INTERACTIVA: Ataque personal a su forma amorosa -->
+        <div class="interactive-surprise">
+            <h2 style="color: var(--accent-yellow); font-size: 1.3rem; margin-bottom: 0.5rem;">Analizando tu forma de amar... 🤔</h2>
+            <p style="color: #a1a1aa; font-size: 0.95rem;">Dicen que sos medio seria o te hacés la difícil, pero a ver... descúbrelo tú misma.</p>
+            <button class="surprise-btn" id="reveal-btn">Ver verdad incómoda 💛</button>
+            
+            <div id="hidden-truth">
+                <h3 style="color: var(--accent-yellow); margin-bottom: 0.8rem; font-size: 1.1rem;">La verdad sobre ti (según yo):</h3>
+                <p>Sé que a veces te hacés la difícil o querés poner distancia, Naho, pero la verdad es que te sale lo tierna aunque intentes disimularlo. Me encanta cómo sos con tus ocurrencias y todo lo que me sumás a los días. Al final, sé que los dos sabemos lo bien que la pasamos juntos. Te quiero un montón, mi niña. 💛</p>
+                <p>Ya sé que a veces te gusta hacerte la difícil y andar con tu coraza por la vida, Naho... pero conmigo te sale perdiendo. Me encanta tu carácter, tus ocurrencias y cómo me aguantas el ritmo en todo. Sos de esas personas que uno no se espera encontrar, pero que una vez que llegan, se vuelven lo más bonito de los días. Gracias por estar, bichita; te quiero un montón y no pienso soltarte. 💛✨</p>
+            </div>
+        </div>
+
+        <!-- Jardín de Flores Amarillas (Clicables) -->
+        <div class="flowers-garden" id="clickable-garden">
+            <div class="flower">
+                <div class="flower-head">
+                    <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+                    <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+                    <div class="flower-center"></div>
+                </div>
+                <div class="flower-stem"></div>
+            </div>
+            <div class="flower">
+                <div class="flower-head">
+                    <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+                    <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+                    <div class="flower-center"></div>
+                </div>
+                <div class="flower-stem"></div>
+            </div>
+            <div class="flower">
+                <div class="flower-head">
+                    <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+                    <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+                    <div class="flower-center"></div>
+                </div>
+                <div class="flower-stem"></div>
+            </div>
+            <div class="flower">
+                <div class="flower-head">
+                    <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+                    <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+                    <div class="flower-center"></div>
+                </div>
+                <div class="flower-stem"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Script para partículas, frases aleatorias y el botón sorpresa -->
+    <script>
+        const bg = document.getElementById('particles-bg');
+        const particleCount = 28;
+
+        for (let i = 0; i < particleCount; i++) {
+            const p = document.createElement('div');
+            p.classList.add('particle');
+            
+            const size = Math.random() * 4 + 2;
+            p.style.width = `${size}px`;
+            p.style.height = `${size}px`;
+            p.style.left = `${Math.random() * 100}vw`;
+            
+            const duration = Math.random() * 10 + 8;
+            const delay = Math.random() * 10;
+            
+            p.style.animationDuration = `${duration}s`;
+            p.style.animationDelay = `${delay}s`;
+            
+            bg.appendChild(p);
+        }
+
+        // Lista de frases y emojis aleatorios para las flores
+        const flowerPhrases = [
+            "bichita miada 😂💛",
+            "te quiero 💛",
+            "te adoro ✨",
+            "eres increíble 🔥",
+            "me encantas 🙈",
+            "la vida es dura pero más dura me la pones tú 😏🔥",
+            "mi niña 💛",
+            "te pasas de linda 🌻",
+            "guapa 💛",
+            "💛💛💛",
+            "✨ Juntos rifamos más ✨",
+            "mi mujer",
+            "eres mia",
+            "yo soy tuyo",
+            "andás bien chula hoy 💫"
+        ];
+
+        // Manejo de clics en las flores del jardín inferior
+        const garden = document.getElementById('clickable-garden');
+        garden.addEventListener('click', (e) => {
+            const randomText = flowerPhrases[Math.floor(Math.random() * flowerPhrases.length)];
+
+            const popup = document.createElement('div');
+            popup.classList.add('floating-popup');
+            popup.innerText = randomText;
+
+            const randomX = Math.random() * (window.innerWidth - 200) + 50;
+            const randomY = Math.random() * (window.innerHeight - 300) + 100;
+
+            popup.style.left = `${randomX}px`;
+            popup.style.top = `${randomY}px`;
+
+            document.body.appendChild(popup);
+
+            setTimeout(() => {
+                popup.remove();
+            }, 3000);
+        });
+
+        // Lógica del botón sorpresa con ataque amoroso
+        const revealBtn = document.getElementById('reveal-btn');
+        const hiddenTruth = document.getElementById('hidden-truth');
+
+        revealBtn.addEventListener('click', () => {
+            hiddenTruth.style.display = 'block';
+            revealBtn.style.display = 'none'; // Oculta el botón tras presionarlo
+
+            // Lanza una lluvia extra de partículas doradas de celebración
+            for (let i = 0; i < 15; i++) {
+                const p = document.createElement('div');
+                p.classList.add('particle');
+                p.style.width = `${Math.random() * 6 + 3}px`;
+                p.style.height = p.style.width;
+                p.style.left = `${Math.random() * 100}vw`;
+                p.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                bg.appendChild(p);
+            }
+        });
+    </script>
+
+</body>
+</html>
