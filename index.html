@@ -132,7 +132,18 @@
             width: 100%;
             height: 220px;
             object-fit: cover;
+            object-position: center 25%; /* Centra un poco mejor las caras por defecto */
             border-bottom: 2px solid var(--accent-yellow);
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        /* Clase que se activa al tocar la foto para verla completa */
+        .card img.expanded {
+            height: auto;
+            max-height: 520px;
+            object-fit: contain;
+            background-color: #0e0e11;
         }
 
         .card-content {
@@ -740,6 +751,13 @@
                 p.style.animationDuration = `${Math.random() * 3 + 2}s`;
                 bg.appendChild(p);
             }
+        });
+        // Hacer que todas las fotos se expandan al tocarlas para verse completas
+        document.querySelectorAll('.card img, .content-box img').forEach(img => {
+            img.style.cursor = 'pointer';
+            img.addEventListener('click', () => {
+                img.classList.toggle('expanded');
+            });
         });
     </script>
     
